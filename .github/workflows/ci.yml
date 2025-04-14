@@ -30,7 +30,7 @@ jobs:
 
     - name: Confirm Go version
       run: go version
-
+      
     - name: Install golang-migrate
       run: |
         apt-get update
@@ -49,6 +49,10 @@ jobs:
         done
 
     - name: run server
+      env:
+          DB_USER: user
+          DB_PASSWORD: admin
+          DB_NAME: simple_bank
       run: go run cmd/main.go
 
     - name: Run migrations
