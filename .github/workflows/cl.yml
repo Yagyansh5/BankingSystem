@@ -52,7 +52,9 @@ jobs:
       run: make migrateup
       working-directory: /__w/BankingSystem/BankingSystem
 
-    - name: Test
-      run: make test
-      working-directory: /__w/BankingSystem/BankingSystem
+    - - name: Run tests directly
+        run: |
+          go version
+          go test -v -cover ./...
+        working-directory: /__w/BankingSystem/BankingSystem
 
