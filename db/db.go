@@ -15,13 +15,15 @@ var DB *gorm.DB
 
 func InitDB() {
 	var err error
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
-		getEnv("DB_HOST", "localhost"),
-		getEnv("DB_USER", "user"),
-		getEnv("DB_PASSWORD", "admin"),
-		getEnv("DB_NAME", "mydatabase"),
-		getEnv("DB_PORT", "5432"),
+	dsn := fmt.Sprintf(
+		"postgres://%s:%s@%s:%s/%s?sslmode=disable",
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_HOST"), // postgres
+		"5432",
+		os.Getenv("DB_NAME"),
 	)
+
 	utils.Logger.Info(dsn)
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
