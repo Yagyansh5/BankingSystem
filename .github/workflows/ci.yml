@@ -53,6 +53,7 @@ jobs:
           DB_USER: user
           DB_PASSWORD: admin
           DB_NAME: simple_bank
+          DB_HOST: postgres
       run: go run cmd/main.go
 
     - name: Run migrations

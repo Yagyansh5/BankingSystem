@@ -15,7 +15,7 @@ var DB *gorm.DB
 
 func InitDB() {
 	var err error
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=require",
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 		getEnv("DB_HOST", "localhost"),
 		getEnv("DB_USER", "user"),
 		getEnv("DB_PASSWORD", "admin"),
