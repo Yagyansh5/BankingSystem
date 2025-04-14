@@ -48,19 +48,30 @@ jobs:
         sleep 5
         done
 
-    - name: run server
+        - name: Run server in background
       env:
-          DB_USER: user
-          DB_PASSWORD: admin
-          DB_NAME: simple_bank
-          DB_HOST: postgres
-      run: go run cmd/main.go
+        DB_USER: user
+        DB_PASSWORD: admin
+        DB_NAME: simple_bank
+        DB_HOST: postgres
+      run: |
+        go run cmd/main.go &
+        echo $! > server.pid
+
+    - name: Wait for server to start
+      run: sleep 3
 
     - name: Run migrations
       run: make migrateup
-      working-directory: /__w/BankingSystem/BankingSystem
+      working-directory: ${{ github.workspace }}
 
-    - name: Run tests 
+    - name: Run tests
       run: make test
-      working-directory: /__w/BankingSystem/BankingSystem
+      working-directory: ${{ github.workspace }}
+
+    - name: Kill server
+      if: always()
+      run: |
+        kill -9 $(cat server.pid) || true
+
 
