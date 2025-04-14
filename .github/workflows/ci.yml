@@ -48,6 +48,9 @@ jobs:
         sleep 5
         done
 
+    - name: run server
+      run: go run cmd/main.go
+
     - name: Run migrations
       run: make migrateup
       working-directory: /__w/BankingSystem/BankingSystem
