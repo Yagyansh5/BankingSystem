@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container: 
-      images: golang:1.23
+      image: golang:1.23
 
     services:
       postgres:
@@ -52,9 +52,7 @@ jobs:
       run: make migrateup
       working-directory: /__w/BankingSystem/BankingSystem
 
-    - name: Run tests directly
-      run: |
-          go version
-          go test -v -cover ./...
+    - name: Run tests 
+      run: make test
       working-directory: /__w/BankingSystem/BankingSystem
 
