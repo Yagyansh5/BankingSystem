@@ -49,10 +49,10 @@ jobs:
         done
 
     - name: Run migrations
-      working-directory: ./BankingSystem
       run: make migrateup
+      working-directory: /__w/BankingSystem/BankingSystem
 
     - name: Test
-      working-directory: ./BankingSystem
       run: make test
+      working-directory: /__w/BankingSystem/BankingSystem
 
