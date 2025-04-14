@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	dbSource = "postgres://user:admin@localhost:5433/simple_bank?sslmode=disable"
+	dbSource = "postgres://user:admin@localhost:5432/simple_bank?sslmode=disable"
 )
 
 var testDB *pgxpool.Pool
