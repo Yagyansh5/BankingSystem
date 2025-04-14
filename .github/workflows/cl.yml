@@ -25,30 +25,33 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Confirm Go version
-        run: go version
+    - name: Confirm Go version
+      run: go version
 
-      - name: Install golang-migrate
-        run: |
-          apt-get update
-          apt-get install -y curl tar postgresql-client
-          curl -L https://github.com/golang-migrate/migrate/releases/download/v4.18.2/migrate.linux-amd64.tar.gz -o migrate.tar.gz
-          tar -xvzf migrate.tar.gz
-          mv migrate /usr/local/bin/
-          which migrate
+    - name: Install golang-migrate
+      run: |
+        apt-get update
+        apt-get install -y curl tar postgresql-client
+        curl -L https://github.com/golang-migrate/migrate/releases/download/v4.18.2/migrate.linux-amd64.tar.gz -o migrate.tar.gz
+        tar -xvzf migrate.tar.gz
+        mv migrate /usr/local/bin/
+        which migrate
 
-      - name: Wait for Postgres to be ready
-        run: |
-          for i in {1..10}; do
-            pg_isready -h postgres -p 5432 && break
-            echo "Waiting for Postgres... ($i)"
-            sleep 5
-          done
+    - name: Wait for Postgres to be ready
+      run: |
+        for i in {1..10}; do
+        pg_isready -h postgres -p 5432 && break
+        echo "Waiting for Postgres... ($i)"
+        sleep 5
+        done
 
-      - name: Run migrations
-        run: make migrateup
+    - name: Run migrations
+      working-directory: ./BankingSystem
+      run: make migrateup
 
-      - name: Test
-        run: make test
+    - name: Test
+      working-directory: ./BankingSystem
+      run: make test
+
