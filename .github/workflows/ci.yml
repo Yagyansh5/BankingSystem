@@ -48,7 +48,7 @@ jobs:
         sleep 5
         done
 
-        - name: Run server in background
+    - name: Run server in background
       env:
         DB_USER: user
         DB_PASSWORD: admin
