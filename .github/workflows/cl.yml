@@ -9,7 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: golang:1.23
+    container: 
+      images: golang:1.23
 
     services:
       postgres:
