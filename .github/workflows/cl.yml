@@ -18,6 +18,8 @@ jobs:
           POSTGRES_USER: user
           POSTGRES_PASSWORD: admin
           POSTGRES_DB: simple_bank
+          ports:
+            -5433:5433
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
